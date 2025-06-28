@@ -1,5 +1,20 @@
 import tkinter as tk
 
+isPickedMark = False
+isPickedEricsson = False
+isPickedZeynep = False
+
+isPickedTurkiye = False
+isPickedUS = False
+isPickedFinland = False
+
+isPickedCC = False
+isPickedC = False
+isPickedBTC = False
+isPickedXMR = False
+
+# not glad I had to use global variables. A bunch of them in fact.
+
 class tourGUI:
 
     def __init__(self):
@@ -46,6 +61,13 @@ class tourGUI:
         self.frame9 = tk.Frame(root)
         self.frame9.configure(bg='#3F3F3F')
         self.frame9.pack_forget()
+
+        label = tk.Label(self.frame1, text='AFS Tourism', bg='#3F3F3F', fg='#FFFFFF', font=('Arial', 32))
+        label.pack(pady=25)
+
+        toursbtn = tk.Button(self.frame1, text='Tours', font=('Arial', 24), bg='#F74AA0', fg='#FFFFFF', command=self.show_frame2)
+        toursbtn.pack(side='left', fill='both', expand=True, padx=75, pady=175)
+
 
         root.mainloop()
     
@@ -126,6 +148,58 @@ class tourGUI:
         self.frame9.pack()
 
     # im sorry for the amount of repeating code in this. GUI makes things really hard.
+
+    def update_isPickedMark(self):
+        global isPickedMark
+        global isPickedEricsson
+        global isPickedZeynep
+        isPickedMark = True
+        isPickedZeynep = False
+        isPickedEricsson = False
+
+    def update_isPickedEricsson(self):
+        global isPickedEricsson
+        global isPickedZeynep
+        global isPickedMark
+        isPickedEricsson = True
+        isPickedZeynep = False
+        isPickedMark = False
+
+    def update_isPickedZeynep(self):
+        global isPickedZeynep
+        global isPickedMark
+        global isPickedEricsson
+        isPickedZeynep = True
+        isPickedMark = False
+        isPickedEricsson = False
+
+    def update_isPickedTurkiye(self):
+        global isPickedTurkiye
+        global isPickedUS
+        global isPickedFinland
+        isPickedTurkiye = True
+        isPickedFinland = False
+        isPickedUS = False
+
+    def update_isPickedUS(self):
+        global isPickedUS
+        global isPickedTurkiye
+        global isPickedFinland
+        isPickedUS = True
+        isPickedFinland = False
+        isPickedTurkiye = False
+
+    def update_isPickedFinland(self):
+        global isPickedFinland
+        global isPickedTurkiye
+        global isPickedUS
+        isPickedFinland = True
+        isPickedTurkiye = False
+        isPickedUS = False
+
+    
+    
+   
 
 
 tourGUI()
