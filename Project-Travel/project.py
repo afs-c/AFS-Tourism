@@ -260,6 +260,55 @@ class tourGUI:
         isPickedTurkiye = False
         isPickedUS = False
 
+    def update_isPickedCC(self):
+        global isPickedCC
+        global isPickedC
+        global isPickedBTC
+        global isPickedXMR
+        isPickedCC = True
+        isPickedC = False
+        isPickedBTC = False
+        isPickedXMR = False
+        self.show_frame5()
+        self.payment_screen()
+
+    def update_isPickedC(self):
+        global isPickedC
+        global isPickedCC
+        global isPickedBTC
+        global isPickedXMR
+        isPickedC = True
+        isPickedCC = False
+        isPickedBTC = False
+        isPickedXMR = False
+        self.show_frame5()
+        self.payment_screen()
+
+    def update_isPickedBTC(self):
+        global isPickedBTC
+        global isPickedCC
+        global isPickedC
+        global isPickedXMR
+        isPickedBTC = True
+        isPickedC = False
+        isPickedCC = False
+        isPickedXMR = False
+        self.show_frame5()
+        self.payment_screen()
+
+    def update_isPickedXMR(self):
+        global isPickedXMR
+        global isPickedC
+        global isPickedBTC
+        global isPickedCC
+        isPickedXMR = True
+        isPickedC = False
+        isPickedBTC = False
+        isPickedCC = False
+        self.show_frame5()
+        self.payment_screen()
+
+
 # a, b and c inherits from tourguide. the groundwork for polymorphism starts from here.
 class tourguide:
     def __init__(self, name, language):
