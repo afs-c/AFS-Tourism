@@ -70,6 +70,50 @@ class tourGUI:
 
 
         root.mainloop()
+
+    def warning(self):
+        if not (isPickedTurkiye or isPickedUS or isPickedFinland):
+            warn_label = tk.Label(self.frame9, text='Come back after you picked your tour', font=('Arial', 20), bg='#3F3F3F', fg='#FFFFFF')
+            warn_label.pack(anchor='s')
+            self.show_frame9()
+    
+     # accesses polymorphism with "for guide in tour_guides"
+    def get_recommendation(self):
+        if isPickedTurkiye:
+            for guide in tour_guides:
+                if guide.language == 'Turkish':
+                    rcm_label_z = tk.Label(self.frame6, text=f'Recommended tour guide(s): {guide.name}', font=('Arial', 24), bg='#3F3F3F', fg='#FFFFFF')
+                    rcm_label_z.pack(anchor='s')
+                    self.show_frame6()
+                    self.frame7.pack_forget()
+                    self.frame8.pack_forget()
+                attribute_name = 'expertise'
+                if hasattr(guide, attribute_name) and getattr(guide, attribute_name) == 'Medieval History':
+                    rcm_label_y = tk.Label(self.frame6, text=f'Might also be according to your liking: {guide.name}', font=('Arial', 24), bg='#3F3F3F', fg='#FFFFFF')
+                    rcm_label_y.pack(anchor='s')
+        if isPickedUS:
+            for guide in tour_guides:
+                attribute_name2 = 'specialty'
+                if guide.language == 'English':
+                    rcm_label_z = tk.Label(self.frame7, text=f'Recommended tour guide(s): {guide.name}', font=('Arial', 24), bg='#3F3F3F', fg='#FFFFFF')
+                    rcm_label_z.pack(anchor='s')
+                    self.show_frame7()
+                    self.frame6.pack_forget()
+                    self.frame8.pack_forget()
+                if hasattr(guide, attribute_name2) and getattr(guide, attribute_name2) == 'Wildlife and Photography':
+                    rcm_label_y = tk.Label(self.frame7, text=f'Might also be according to your liking: {guide.name}', font=('Arial', 24), bg='#3F3F3F', fg='#FFFFFF')
+                    rcm_label_y.pack(anchor='s')
+        if isPickedFinland:
+            for guide in tour_guides:
+                if guide.language == 'Finnish':
+                    rcm_label_z = tk.Label(self.frame8, text=f'Recommended tour guide(s): {guide.name}\n-', font=('Arial', 24), bg='#3F3F3F', fg='#FFFFFF')
+                    rcm_label_z.pack(anchor='s')
+                    self.show_frame8()
+                    self.frame6.pack_forget()
+                    self.frame7.pack_forget()
+    # accesses polymorphism with "for guide in tour_guides"
+
+
     
     def show_frame1(self):
         self.frame2.pack_forget()
