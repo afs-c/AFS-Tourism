@@ -1,4 +1,5 @@
 import tkinter as tk
+import random
 
 isPickedMark = False
 isPickedEricsson = False
@@ -112,6 +113,24 @@ class tourGUI:
                     self.frame6.pack_forget()
                     self.frame7.pack_forget()
     # accesses polymorphism with "for guide in tour_guides"
+
+    def charity_tax(self):
+        return round(50 ** random.uniform(0.8, 0.9))
+
+
+    def payment_screen(self):
+        if isPickedCC:
+            cc_screen = tk.Label(self.frame5, text=f'You paid {self.charity_tax()} dollars to charity and 150 in total using credit card.\nYou can now exit this app.', font=('Arial', 20), bg='#3F3F3F', fg='#FFFFFF', height=2, width=60)
+            cc_screen.pack()
+        elif isPickedC:
+            c_screen = tk.Label(self.frame5, text='You paid 150 dollars in total using cash.\nYou can now exit this app.', font=('Arial', 20), bg='#3F3F3F', fg='#FFFFFF', height=2, width=60)
+            c_screen.pack()
+        elif isPickedBTC:
+            btc_screen = tk.Label(self.frame5, text='You paid 150 dollars in total using bitcoin.\nYou can now exit this app.', font=('Arial', 20), bg='#3F3F3F', fg='#FFFFFF', height=2, width=60)
+            btc_screen.pack()
+        elif isPickedXMR:
+            xmr_screen = tk.Label(self.frame5, text='You paid 150 dollars in total using monero.\nYou can now exit this app.', font=('Arial', 20), bg='#3F3F3F', fg='#FFFFFF', height=2, width=60)
+            xmr_screen.pack()
 
 
     
