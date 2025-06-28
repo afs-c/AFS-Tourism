@@ -69,6 +69,98 @@ class tourGUI:
         toursbtn = tk.Button(self.frame1, text='Tours', font=('Arial', 24), bg='#F74AA0', fg='#FFFFFF', command=self.show_frame2)
         toursbtn.pack(side='left', fill='both', expand=True, padx=75, pady=175)
 
+        cartbtn = tk.Button(self.frame1, text='Your cart', font=('Arial', 24), bg='#F74AA0', fg='#FFFFFF', command=lambda:[self.show_frame3(), self.warning()])
+        cartbtn.pack(side='left', fill='both', expand=True, padx=75, pady=175)
+
+        goback1 = tk.Button(self.frame2, text='Go Back', font=('Arial', 16), bg="#303030", fg='#FFFFFF', command=self.show_frame1)
+        goback1.pack(anchor='nw')
+
+        label_tours_guides = tk.Label(self.frame2, text=r'Tours     \\     Guides', font=('Arial', 25), bg='#3F3F3F', fg='#FFFFFF', width=100)
+        label_tours_guides.pack()
+
+        goback2 = tk.Button(self.frame3, text='Go Back', font=('Arial', 16), bg='#303030', fg='#FFFFFF', command=self.show_frame1)
+        goback2.pack(anchor='nw')
+
+        infolabel = tk.Label(self.frame3, text='Finish payment', font=('Arial', 24), bg='#3F3F3F', fg='#FFFFFF', width=100)
+        infolabel.pack()
+
+        infotext = tk.Text(self.frame3, height=3, width=45, bg='#3F3F3F', fg='#83D189', font=('Arial', 16))
+        infotext.insert('1.0', 'GREAT OPPORTUNITY!! ALL TOURS ARE 150 EUROS!!\nIf you use credit card, some of the money will\ngo to charity.')
+        infotext.config(state='disabled')
+        infotext.pack(pady=25)
+
+        ccbtn = tk.Button(self.frame3, text='Credit Card', font=('Arial', 24), bg='#F74AA0', fg='#FFFFFF', command=self.update_isPickedCC)
+        ccbtn.pack(side='left', fill='both', expand=True, padx=75, pady=175)
+
+        cbtn = tk.Button(self.frame3, text='Cash', font=('Arial', 24), bg='#F74AA0', fg='#FFFFFF', command=self.update_isPickedC)
+        cbtn.pack(side='left', fill='both', expand=True, padx=75, pady=175)
+
+        btcbtn = tk.Button(self.frame3, text='Bitcoin', font=('Arial', 24), bg='#F74AA0', fg='#FFFFFF', command=self.update_isPickedBTC)
+        btcbtn.pack(side='left', fill='both', expand=True, padx=75, pady=175)
+
+        xmrbtn = tk.Button(self.frame3, text='Monero', font=('Arial', 24), bg='#F74AA0', fg='#FFFFFF', command=self.update_isPickedXMR)
+        xmrbtn.pack(side='left', fill='both', expand=True, padx=75, pady=175)
+
+
+
+        text_ant = tk.Text(self.frame2, height=1, width=16, font=('Arial', 16), bg='#3F3F3F', fg='#FFFFFF')
+        text_ant.insert('1.0', 'Türkiye Antalya Tour')
+        text_ant.config(state='disabled')
+        text_ant.pack(padx=50, anchor='nw')
+
+        # I don't think entry has a feature where you can change it's bg color. From my experience, only the fg color would change.
+
+        btn_ant = tk.Button(self.frame2, text='Select', font=('Arial', 14), bg='#F74AA0', fg='#FFFFFF', command=self.update_isPickedTurkiye)
+        btn_ant.pack(padx=90, anchor='nw')
+
+        text_guide_a = tk.Text(self.frame2, height=2, width=24, font=('Arial', 16), bg='#3F3F3F', fg='#FFFFFF')
+        text_guide_a.insert('1.0', 'Mark\n - 10 years of experience')
+        text_guide_a.config(state='disabled')
+        text_guide_a.pack(padx=50, anchor='ne')
+
+        btn_guide_a = tk.Button(self.frame2, text='Choose guide', font=('Arial', 16), bg='#F74AA0', fg='#FFFFFF', command=self.update_isPickedMark)
+        btn_guide_a.pack(padx=125, anchor='ne')
+
+        text_southdakota = tk.Text(self.frame2, height=1, width=18, font=('Arial', 16), bg='#3F3F3F', fg='#FFFFFF')
+        text_southdakota.insert('1.0', 'US South Dakota Tour')
+        text_southdakota.config(state='disabled')
+        text_southdakota.pack(padx=50, anchor='nw')
+
+        btn_sd = tk.Button(self.frame2, text='Select', font=('Arial', 14), bg='#F74AA0', fg='#FFFFFF', command=self.update_isPickedUS)
+        btn_sd.pack(padx=90, anchor='nw')
+
+        text_guide_b = tk.Text(self.frame2, height=2, width=24, font=('Arial', 16), bg='#3F3F3F', fg='#FFFFFF')
+        text_guide_b.insert('1.0', 'Ericsson\n - 16 years of experience')
+        text_guide_b.config(state='disabled')
+        text_guide_b.pack(padx=50, anchor='ne')
+
+        btn_guide_b = tk.Button(self.frame2, text='Choose guide', font=('Arial', 16), bg='#F74AA0', fg='#FFFFFF', command=self.update_isPickedEricsson)
+        btn_guide_b.pack(padx=125, anchor='ne')
+
+        text_helsinki = tk.Text(self.frame2, height=1, width=18, font=('Arial', 16), bg='#3F3F3F', fg='#FFFFFF')
+        text_helsinki.insert('1.0', 'Finland Helsinki Tour')
+        text_helsinki.config(state='disabled')
+        text_helsinki.pack(padx=50, anchor='nw')
+
+        btn_hels = tk.Button(self.frame2, text='Select', font=('Arial', 14), bg='#F74AA0', fg='#FFFFFF', command=self.update_isPickedFinland)
+        btn_hels.pack(padx=90, anchor='nw')
+
+        text_guide_c = tk.Text(self.frame2, height=2, width=24, font=('Arial', 16), bg='#3F3F3F', fg='#FFFFFF')
+        text_guide_c.insert('1.0', 'Zeynep\n - 14 years of experience')
+        text_guide_c.config(state='disabled')
+        text_guide_c.pack(padx=50, anchor='ne')
+
+        btn_guide_b = tk.Button(self.frame2, text='Choose guide', font=('Arial', 16), bg='#F74AA0', fg='#FFFFFF', command=self.update_isPickedZeynep)
+        btn_guide_b.pack(padx=125, anchor='ne')
+
+        note_label = tk.Label(self.frame2, text='The information and plan will be given to you by our tour guides.\nThe price of the tour guides are included in the total price of the tour.', bg='#3F3F3F', fg='#FFFFFF', font=('Arial', 16))
+        note_label.pack(pady=20)
+
+        recommend_btn = tk.Button(self.frame2, text='Recommend a tour guide', font=('Arial', 18), bg='#F74AA0', fg='#FFFFFF', command=self.get_recommendation)
+        recommend_btn.pack()
+
+        goback3 = tk.Button(self.frame9, text='Go Back', font=('Arial', 16), bg='#303030', fg='#FFFFFF', command=self.show_frame1)
+        goback3.pack(anchor='n')
 
         root.mainloop()
 
