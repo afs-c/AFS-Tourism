@@ -197,7 +197,42 @@ class tourGUI:
         isPickedTurkiye = False
         isPickedUS = False
 
-    
+# a, b and c inherits from tourguide. the groundwork for polymorphism starts from here.
+class tourguide:
+    def __init__(self, name, language):
+        self.name = name
+        self.language = language
+
+class tourguide_a(tourguide):
+    def __init__(self, name, language, expertise):
+        super().__init__(name, language)
+        self.expertise = expertise
+
+
+class tourguide_b(tourguide):
+    def __init__(self, name, language, specialty):
+        super().__init__(name, language)
+        self.specialty = specialty
+
+class tourguide_c(tourguide):
+    def __init__(self, name, language, profession):
+        super().__init__(name, language)
+        self.profession = profession
+
+# in my opinion, expertise and specialty are different things.
+# specialty is more like less people would have
+# expertise is in the middle
+# and profession is the last one
+
+tour_guides = [
+    tourguide_a('Mark', 'English', 'Medieval History'),
+    tourguide_b('Ericsson', 'Finnish', 'Wildlife and Photography'),
+    tourguide_c('Zeynep', 'Turkish', 'None')
+]
+
+#the get_recommendation function uses this.
+
+
     
    
 
