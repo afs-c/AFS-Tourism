@@ -1,0 +1,13 @@
+Title of Project: Application for Travel Agency
+The programming language used is -- Python
+
+Description of the Project:
+This project is a travel agency application designed so that users can explore and book travel tours easily. The main features of the application are:
+
+	
+  Tour Listings
+The user will be sent to a main screen where they can browse a list of available travel tours.
+Basic details about each tour, like the title and destination, will be present. The user will also be able to choose a guide from our recommendation system.
+	Payment System
+Once the reservation is submitted, the user will be sent to the payment page.
+Users will be able to choose a payment method and complete the transaction.
