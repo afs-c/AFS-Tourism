@@ -48,5 +48,84 @@ class tourGUI:
         self.frame9.pack_forget()
 
         root.mainloop()
+    
+    def show_frame1(self):
+        self.frame2.pack_forget()
+        self.frame3.pack_forget()
+        self.frame4.pack_forget()
+        self.frame5.pack_forget()
+        self.frame6.pack_forget()
+        self.frame7.pack_forget()
+        self.frame8.pack_forget()
+        self.frame9.pack_forget()
+        self.frame1.pack()
+
+    def show_frame2(self):
+        self.frame1.pack_forget()
+        self.frame3.pack_forget()
+        self.frame4.pack_forget()
+        self.frame5.pack_forget()
+        self.frame6.pack_forget()
+        self.frame7.pack_forget()
+        self.frame8.pack_forget()
+        self.frame9.pack_forget()
+        self.frame2.pack()
+
+    def show_frame3(self):
+        self.frame1.pack_forget()
+        self.frame2.pack_forget()
+        self.frame4.pack_forget()
+        self.frame5.pack_forget()
+        self.frame6.pack_forget()
+        self.frame7.pack_forget()
+        self.frame8.pack_forget()
+        self.frame9.pack_forget()
+        self.frame3.pack()
+
+    def show_frame4(self):
+        self.frame1.pack_forget()
+        self.frame2.pack_forget()
+        self.frame3.pack_forget()
+        self.frame5.pack_forget()
+        self.frame6.pack_forget()
+        self.frame7.pack_forget()
+        self.frame8.pack_forget()
+        self.frame9.pack_forget()
+        self.frame4.pack()
+
+    # payment frame is frame5
+    def show_frame5(self):
+        self.frame1.pack_forget()
+        self.frame2.pack_forget()
+        self.frame3.pack_forget()
+        self.frame4.pack_forget()
+        self.frame6.pack_forget()
+        self.frame7.pack_forget()
+        self.frame8.pack_forget()
+        self.frame9.pack_forget()
+        self.frame5.pack()
+
+    def show_frame6(self):
+        self.frame6.pack()
+
+    def show_frame7(self):
+        self.frame7.pack()
+
+    def show_frame8(self):
+        self.frame8.pack()
+
+    def show_frame9(self):
+        self.frame1.pack_forget()
+        self.frame2.pack_forget()
+        self.frame3.pack_forget()
+        self.frame4.pack_forget()
+        self.frame5.pack_forget()
+        self.frame6.pack_forget()
+        self.frame7.pack_forget()
+        self.frame8.pack_forget()
+        self.frame9.pack()
+
+    # im sorry for the amount of repeating code in this. GUI makes things really hard.
+
 
 tourGUI()
