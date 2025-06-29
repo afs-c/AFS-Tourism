@@ -1,5 +1,6 @@
 import tkinter as tk
 import random
+from abc import ABC, abstractmethod
 
 isPickedMark = False
 isPickedEricsson = False
@@ -62,6 +63,12 @@ class tourGUI:
         self.frame9 = tk.Frame(root)
         self.frame9.configure(bg='#3F3F3F')
         self.frame9.pack_forget()
+
+        self.tour_guides = [
+            tourguide_history('Mark', 'Medieval History'),
+            tourguide_photograph('Ericsson', 'Wildlife and Photography'),
+            tourguide_med('Zeynep', 'Mediterranean Landscape')
+        ]
 
         label = tk.Label(self.frame1, text='AFS Tourism', bg='#3F3F3F', fg='#FFFFFF', font=('Arial', 32))
         label.pack(pady=25)
@@ -156,11 +163,15 @@ class tourGUI:
         note_label = tk.Label(self.frame2, text='The information and plan will be given to you by our tour guides.\nThe price of the tour guides are included in the total price of the tour.', bg='#3F3F3F', fg='#FFFFFF', font=('Arial', 16))
         note_label.pack(pady=20)
 
-        recommend_btn = tk.Button(self.frame2, text='Recommend a tour guide', font=('Arial', 18), bg='#F74AA0', fg='#FFFFFF', command=self.get_recommendation)
+        recommend_btn = tk.Button(self.frame2, text='Recommend a tour guide', font=('Arial', 18), bg='#F74AA0', fg='#FFFFFF', command=self.show_recommendation)
         recommend_btn.pack()
 
         goback3 = tk.Button(self.frame9, text='Go Back', font=('Arial', 16), bg='#303030', fg='#FFFFFF', command=self.show_frame1)
         goback3.pack(anchor='n')
+
+        self.result_label = tk.Label(self.frame2, text='', bg='#3F3F3F', fg='#FFFFFF', font=('Arial', 20))
+        self.result_label.pack()
+
 
         root.mainloop()
 
@@ -169,42 +180,25 @@ class tourGUI:
             warn_label = tk.Label(self.frame9, text='Come back after you picked your tour', font=('Arial', 20), bg='#3F3F3F', fg='#FFFFFF')
             warn_label.pack(anchor='s')
             self.show_frame9()
-    
-     # accesses polymorphism with "for guide in tour_guides"
-    def get_recommendation(self):
+
+    def show_recommendation(self):
+        global isPickedTurkiye
+        global isPickedUS
+        global isPickedFinland
         if isPickedTurkiye:
-            for guide in tour_guides:
-                if guide.language == 'Turkish':
-                    rcm_label_z = tk.Label(self.frame6, text=f'Recommended tour guide(s): {guide.name}', font=('Arial', 24), bg='#3F3F3F', fg='#FFFFFF')
-                    rcm_label_z.pack(anchor='s')
-                    self.show_frame6()
-                    self.frame7.pack_forget()
-                    self.frame8.pack_forget()
-                attribute_name = 'expertise'
-                if hasattr(guide, attribute_name) and getattr(guide, attribute_name) == 'Medieval History':
-                    rcm_label_y = tk.Label(self.frame6, text=f'Might also be according to your liking: {guide.name}', font=('Arial', 24), bg='#3F3F3F', fg='#FFFFFF')
-                    rcm_label_y.pack(anchor='s')
-        if isPickedUS:
-            for guide in tour_guides:
-                attribute_name2 = 'specialty'
-                if guide.language == 'English':
-                    rcm_label_z = tk.Label(self.frame7, text=f'Recommended tour guide(s): {guide.name}', font=('Arial', 24), bg='#3F3F3F', fg='#FFFFFF')
-                    rcm_label_z.pack(anchor='s')
-                    self.show_frame7()
-                    self.frame6.pack_forget()
-                    self.frame8.pack_forget()
-                if hasattr(guide, attribute_name2) and getattr(guide, attribute_name2) == 'Wildlife and Photography':
-                    rcm_label_y = tk.Label(self.frame7, text=f'Might also be according to your liking: {guide.name}', font=('Arial', 24), bg='#3F3F3F', fg='#FFFFFF')
-                    rcm_label_y.pack(anchor='s')
-        if isPickedFinland:
-            for guide in tour_guides:
-                if guide.language == 'Finnish':
-                    rcm_label_z = tk.Label(self.frame8, text=f'Recommended tour guide(s): {guide.name}\n-', font=('Arial', 24), bg='#3F3F3F', fg='#FFFFFF')
-                    rcm_label_z.pack(anchor='s')
-                    self.show_frame8()
-                    self.frame6.pack_forget()
-                    self.frame7.pack_forget()
-    # accesses polymorphism with "for guide in tour_guides"
+            tour_type = 'Mediterranean Landscape'
+        elif isPickedUS:
+            tour_type = 'Wildlife and Photography'
+        elif isPickedFinland:
+            tour_type = 'Medieval History'
+        else:
+            self.result_label.config(text='Pick a tour guide before getting recommendations.')
+            return
+        
+        recommendations = get_recommendations(self.tour_guides, tour_type)
+        if recommendations:
+            guide_names = ', '.join(str(g) for g in recommendations)
+            self.result_label.config(text=f'Recommended guide(s): {guide_names} ({tour_type})')
 
     def charity_tax(self):
         return round(50 ** random.uniform(0.8, 0.9))
@@ -224,8 +218,8 @@ class tourGUI:
             xmr_screen = tk.Label(self.frame5, text='You paid 150 dollars in total using monero.\nYou can now exit this app.', font=('Arial', 20), bg='#3F3F3F', fg='#FFFFFF', height=2, width=60)
             xmr_screen.pack()
 
+                    
 
-    
     def show_frame1(self):
         self.frame2.pack_forget()
         self.frame3.pack_forget()
@@ -303,6 +297,7 @@ class tourGUI:
         self.frame9.pack()
 
     # im sorry for the amount of repeating code in this. GUI makes things really hard.
+
 
     def update_isPickedMark(self):
         global isPickedMark
@@ -400,28 +395,44 @@ class tourGUI:
         self.show_frame5()
         self.payment_screen()
 
-
 # a, b and c inherits from tourguide. the groundwork for polymorphism starts from here.
 class tourguide:
-    def __init__(self, name, language):
+    def __init__(self, name):
         self.name = name
-        self.language = language
 
-class tourguide_a(tourguide):
-    def __init__(self, name, language, expertise):
-        super().__init__(name, language)
+    @abstractmethod
+    def match_tour(self, tour_type):
+        pass
+
+    def __str__(self):
+        return f'{self.name}'
+
+class tourguide_history(tourguide):
+    def __init__(self, name, expertise):
+        super().__init__(name)
         self.expertise = expertise
 
+    def match_tour(self, tour_type):
+        return tour_type.lower() in self.expertise.lower()
 
-class tourguide_b(tourguide):
-    def __init__(self, name, language, specialty):
-        super().__init__(name, language)
+class tourguide_photograph(tourguide):
+    def __init__(self, name, specialty):
+        super().__init__(name)
         self.specialty = specialty
 
-class tourguide_c(tourguide):
-    def __init__(self, name, language, profession):
-        super().__init__(name, language)
+    def match_tour(self, tour_type):
+        return tour_type.lower() in self.specialty.lower()
+
+class tourguide_med(tourguide):
+    def __init__(self, name, profession):
+        super().__init__(name)
         self.profession = profession
+
+    def match_tour(self, tour_type):
+        return tour_type.lower() in self.profession.lower()
+    
+def get_recommendations(tour_guides, tour_type):
+    return [guide for guide in tour_guides if guide.match_tour(tour_type)]
 
 # in my opinion, expertise and specialty are different things.
 # specialty is more like less people would have
@@ -429,16 +440,9 @@ class tourguide_c(tourguide):
 # and profession is the last one
 
 tour_guides = [
-    tourguide_a('Mark', 'English', 'Medieval History'),
-    tourguide_b('Ericsson', 'Finnish', 'Wildlife and Photography'),
-    tourguide_c('Zeynep', 'Turkish', 'None')
+    tourguide_history('Mark', 'Medieval History'),
+    tourguide_photograph('Ericsson', 'Wildlife and Photography'),
+    tourguide_med('Zeynep', 'Mediterranean Landscape')
 ]
-
-#the get_recommendation function uses this.
-
-
-    
-   
-
 
 tourGUI()
